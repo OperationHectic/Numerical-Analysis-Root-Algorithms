@@ -16,6 +16,8 @@ public:
 	
 	int getIterations();
 	void setIterations(int iter);
+	T getTolerance();
+	void setTolerance(T tol);
 	T evalA();
 	T evalB();
 	T getMid();

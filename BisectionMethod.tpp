@@ -1,4 +1,5 @@
 #include "MathFunctions.h"
+#include "utils.h"
 #include <math.h>
 #include <iostream>
 
@@ -9,7 +10,7 @@ BisectionMethod<T>::BisectionMethod(T a, T b, T (*func)(T)):
 	func(func)
 {
 	maxIterations = 50;
-	tolerance = .0001;
+	tolerance = .00000000000001;
 }
 
 template <class T>
@@ -22,6 +23,18 @@ template <class T>
 void BisectionMethod<T>::setIterations(int iter)
 {
 	maxIterations = iter;
+}
+
+template <class T>
+T BisectionMethod<T>::getTolerance()
+{
+	return tolerance;
+}
+
+template <class T>
+void BisectionMethod<T>::setTolerance(T tol)
+{
+	tolerance = tol;
 }
 
 template <class T>
@@ -52,7 +65,7 @@ T BisectionMethod<T>::getMid()
 template <class T>
 T BisectionMethod<T>::findRoot()
 {
-	T c, fa, fb, fc, tol;
+	T c, fa, fb, fc;
     int n = 1;
 
 	while(n <= maxIterations)
@@ -63,9 +76,16 @@ T BisectionMethod<T>::findRoot()
 		c = getMid();
 		fc = func(c);
 
+		if((fc == 0) || (b-a)/2 < tolerance)
+		{
+			std::cout << "root found" << "\n";
+			std::cout << "number of iterations " << n << "\n";
+			return c;
+		}
+
 		n += 1;
 
-		if(fc < 0)
+		if(sgn<T>(fc) == sgn<T>(fa))
 		{
 			a = c;
 		}
@@ -74,6 +94,7 @@ T BisectionMethod<T>::findRoot()
 		    b = c;
 		}
 	}
+	std::cout << "out of loop" << "\n";
 	return c;
 }
 

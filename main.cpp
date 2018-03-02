@@ -2,8 +2,6 @@
 #include <iostream>
 #include <iomanip>   
 
-using namespace std;
-
 int main()
 {
 	BisectionMethod<double>* bisec = new BisectionMethod<double>(1, 10, [](double x) { return (x*x*x*x*x*x*x + x*x*x*x - 5) * 3 * x; });
