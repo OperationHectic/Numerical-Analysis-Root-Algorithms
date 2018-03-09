@@ -1,4 +1,3 @@
-#include "MathFunctions.h"
 #include "utils.h"
 #include <math.h>
 #include <iostream>
@@ -14,59 +13,36 @@ BisectionMethod<T>::BisectionMethod(T a, T b, T (*func)(T)):
 }
 
 template <class T>
-int BisectionMethod<T>::getIterations()
-{
-	return maxIterations;
-}
+int BisectionMethod<T>::getIterations() const { return maxIterations; }
 
 template <class T>
-void BisectionMethod<T>::setIterations(int iter)
-{
-	maxIterations = iter;
-}
+void BisectionMethod<T>::setIterations(int iter) { maxIterations = iter; }
 
 template <class T>
-T BisectionMethod<T>::getTolerance()
-{
-	return tolerance;
-}
+T BisectionMethod<T>::getTolerance() const { return tolerance; }
 
 template <class T>
-void BisectionMethod<T>::setTolerance(T tol)
-{
-	tolerance = tol;
-}
+void BisectionMethod<T>::setTolerance(T tol) { tolerance = tol; }
 
 template <class T>
-T BisectionMethod<T>::evaluate(T val)
-{
-	return func(val);
-}
+T BisectionMethod<T>::evaluate(T val) const { return func(val); }
 
 template <class T>
-T BisectionMethod<T>::evalA()
-{
-	return evaluate(a);
-}
+T BisectionMethod<T>::evalA() const { return evaluate(a); }
 
 template <class T>
-T BisectionMethod<T>::evalB()
-{
-	return evaluate(b);
-}
+T BisectionMethod<T>::evalB() const { return evaluate(b); }
 
 template <class T>
-T BisectionMethod<T>::getMid()
-{
-	T mid = (a + b) / 2;
-	return mid;
-}
+T BisectionMethod<T>::getMid() const { return (T)(a + b) / 2; }
 
 template <class T>
 T BisectionMethod<T>::findRoot()
 {
 	T c, fa, fb, fc;
     int n = 1;
+
+	std::cout << "Bisection Method" << "\n";
 
 	while(n <= maxIterations)
 	{
@@ -78,7 +54,6 @@ T BisectionMethod<T>::findRoot()
 
 		if((fc == 0) || (b-a)/2 < tolerance)
 		{
-			std::cout << "root found" << "\n";
 			std::cout << "number of iterations " << n << "\n";
 			return c;
 		}
@@ -94,11 +69,9 @@ T BisectionMethod<T>::findRoot()
 		    b = c;
 		}
 	}
-	std::cout << "out of loop" << "\n";
+	std::cout << "Max iterations exceeded. Try increasing max iterations with method setIterations" << "\n";
 	return c;
 }
 
 template <class T>
-BisectionMethod<T>::~BisectionMethod()
-{
-}
+BisectionMethod<T>::~BisectionMethod() { }

@@ -4,23 +4,27 @@
 template <class T>
 class BisectionMethod
 {
+private:
 	T a, b;
 	T (*func)(T);
 	int maxIterations;
 	T tolerance;
 
-	T evaluate(T val);
+	T evaluate(T val) const;
 public:
-	BisectionMethod(T a, T b,T (*func)(T));
+	BisectionMethod(T a, T b, T (*func)(T));
 	~BisectionMethod();
 	
-	int getIterations();
+	int getIterations() const;
 	void setIterations(int iter);
-	T getTolerance();
+	
+	T getTolerance() const;
 	void setTolerance(T tol);
-	T evalA();
-	T evalB();
-	T getMid();
+	
+	T evalA() const;
+	T evalB() const;
+	T getMid() const;
+	
 	T findRoot();
 };
 
